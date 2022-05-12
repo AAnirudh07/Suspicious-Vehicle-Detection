@@ -1,0 +1,60 @@
+#:kivy 1.1.0
+
+Root:
+    source_player: source_player
+    dest_player: dest_player
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: 'Load Source Toll Gate'
+                on_release: root.show_load_source()
+            Button:
+                text: 'Load Destination Toll Gate'
+                on_release: root.show_load_dest()
+
+        BoxLayout:
+            VideoPlayer:
+                id: source_player
+            VideoPlayer:
+                id: dest_player
+
+<LoadSourceDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: sourcefilechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(sourcefilechooser.path, sourcefilechooser.selection, 'source')
+
+<LoadDestDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: destfilechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(destfilechooser.path, destfilechooser.selection, 'dest')
