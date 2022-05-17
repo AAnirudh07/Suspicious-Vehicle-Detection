@@ -15,6 +15,7 @@ classes = ['car', 'motorcycle', 'vehicle', 'bus', 'truck', 'auto rickshaw', 'ric
 start = time.time()
 frame_num=0
 values = []
+vehicle_count=0
 fol = sys.argv[1]
 cap = cv2.VideoCapture(fol+'.mp4')
 while True:
@@ -28,9 +29,12 @@ while True:
         for count,row in enumerate(res):
             value = []
             if(row['name'] in classes):
+                vehicle_count+=1
+                print(vehicle_count)
                 img_crop = frame[int(row['ymin']):int(row['ymax']), int(row['xmin']):int(row['xmax']), :]
-                name = str(frame_num)+"_"+str(count)+".jpg"
+                name = str(vehicle_count)+".jpg"
                 cv2.imwrite(fol+"\\"+name,img_crop)
+                value.append(vehicle_count)
                 value.append(name)
                 value.append(row['name'])
                 value.append('red')
@@ -38,6 +42,6 @@ while True:
                 values.append(value)
     frame_num+=1
 
-df =  pd.DataFrame(values,columns=['file','type','color','frame_num'])
+df =  pd.DataFrame(values,columns=['id','file','type','color','frame_num'])
 df.to_csv(fol+'.csv')
 print((time.time() - start)/1000)

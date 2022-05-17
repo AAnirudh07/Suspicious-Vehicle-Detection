@@ -3,7 +3,7 @@ from tracker import *
 
 tracker = EuclideanDistTracker()
 
-cap = cv2.VideoCapture("D:/Projects/suspicious-vehicle-detection/data/videos/Ch8_20220112161012.mp4")
+cap = cv2.VideoCapture("D:\Desktop\\test_pics\\in.mp4")
 object_detector = cv2.createBackgroundSubtractorMOG2(history=100, varThreshold=40)
 
 while True:
