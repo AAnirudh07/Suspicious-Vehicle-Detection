@@ -10,7 +10,7 @@ while True:
     ret, frame = cap.read()
     height, width, _ = frame.shape
 
-    roi = frame[600: 1080,0: 1600]
+    roi = frame[550: 1080,:]
 
     mask = object_detector.apply(roi)
     _, mask = cv2.threshold(mask, 254, 255, cv2.THRESH_BINARY)
@@ -20,8 +20,6 @@ while True:
         area = cv2.contourArea(cnt)
         if area > 20000:
             x, y, w, h = cv2.boundingRect(cnt)
-
-
             detections.append([x, y, w, h])
 
     boxes_ids = tracker.update(detections)
@@ -34,7 +32,7 @@ while True:
     #cv2.imshow("Frame", frame)
     #cv2.imshow("Mask", mask)
 
-    key = cv2.waitKey(30)
+    key = cv2.waitKey(1)
     if key == 27:
         break
 

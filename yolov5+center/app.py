@@ -8,14 +8,13 @@ import json
 ffmpeg_path = "D:/Apps/ffmpeg/bin"
 skvideo.setFFmpegPath(ffmpeg_path)
 
-from object_detection import ObjectDetection
 import math
 
 import skvideo
 import skvideo.io
 import os
 
-
+cv2.namedWindow("frame", cv2.WINDOW_NORMAL) 
 def create_mask(img, colors):
     """
     Creates a binary mask from HSV image using given colors.
@@ -136,12 +135,11 @@ def predict(vid_path):
     center_points_prev_frame = []
     vid = cv2.VideoCapture(vid_path)
     output = []
-    idx=0
     video = skvideo.io.FFmpegWriter('output.mp4',{"-pix_fmt":"bgr24"},{"-q":"0", "-color_primaries": "3", "-color_trc": "1", "-colorspace": "1"})
     while(True):
         #print(idx)
-        idx = idx + 1
-        ret, img = vid.read()
+        ret, img = vid.read()       
+        #cv2.line(img, pt1=(100,100), pt2=(400,400), color=(0,0,255), thickness=10)
         count+=1
         width  = vid.get(cv2.CAP_PROP_FRAME_WIDTH)   # float `width`
         height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float `height`
@@ -157,7 +155,8 @@ def predict(vid_path):
         for idx,pt2 in tracking_objects.items() :
             tracking_objects[idx][1]=False
         for row in res:
-            if(row['name'] in ['car', 'motorcycle', 'vehicle', 'bus', 'truck', 'auto rickshaw', 'rickshaw', 'SUV', 'scooter', 'sedan', 'coupe', 'station wagon', 'hatchback', 'convertible', 'van']):
+            if(row['name'] in ['car', 'vehicle', 'bus', 'truck', 'auto rickshaw', 'rickshaw', 'SUV', 'scooter', 'sedan', 'coupe', 'station wagon', 'hatchback', 'convertible', 'van'] and int(row['ymax'])>600 and int(row['xmin'])>400):
+                
                 cv2.rectangle(img, (int(row['xmin']),int(row['ymin'])),(int(row['xmax']),int(row['ymax'])),(255, 0, 0), 2)
                 img_crop = img[int(row['ymin']):int(row['ymax']), int(row['xmin']):int(row['xmax']), :]
                 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
@@ -176,7 +175,7 @@ def predict(vid_path):
                 vehicleid = -1
                 for idx,pt2 in tracking_objects.items() :
                             distance = math.hypot(pt2[0][0] - cx, pt2[0][1] - cy)
-                            if distance < 20:
+                            if distance < 100:
                                 tracking_objects[idx] = [(cx,cy),True]
                                 vehicleid=idx
                                 break
@@ -193,6 +192,10 @@ def predict(vid_path):
         for idx in to_be_del:
             del tracking_objects[idx]
                 # center_points_prev_frame=center_points_cur_frame
+        cv2.imshow("frame",img)
+        key = cv2.waitKey(1)
+        if key == 27:
+            break
         video.writeFrame(img)
     output = np.array(output)
     fps = 25
