@@ -6,3 +6,4 @@ yolov5_detecting_from_frames/out/*
 yolov5_detecting_from_frames/in.mp4
 yolov5_detecting_from_frames/out.mp4
 yolov5_detecting_from_frames/yolov5s.pt
+.vscode
