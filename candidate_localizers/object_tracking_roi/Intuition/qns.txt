@@ -1,0 +1,8 @@
+1. night time videos
+2. Hybrid model
+3. What is the time difference analysis for imutils
+4. Blindspot vehicles - RoI through front end
+5. Result as a table
+6. Suspicious vehicle number plate
+7. parameterized input time frames
+8. Few shot methods (for detecting vehicle on prev day)
