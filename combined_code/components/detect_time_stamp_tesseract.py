@@ -20,7 +20,6 @@ def preprocess(image, target=30):
     Preprocesses the image for Tesseract
     '''
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = image[:100,:500]
 
     # correct the text height
     ratio = max(0.5, min(1.5, target / image.shape[0]))

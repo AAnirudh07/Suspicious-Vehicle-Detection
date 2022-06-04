@@ -1,0 +1,8 @@
+numpy
+opencv-python
+torch
+scikit-learn
+imultis
+pytesseract
+argparse
+shutils
