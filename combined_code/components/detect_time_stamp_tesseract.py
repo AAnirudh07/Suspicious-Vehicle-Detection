@@ -39,11 +39,11 @@ cap = cv2.VideoCapture(PATH)
 ret = True
 while True:
     ret,frame = cap.read()
+    frame = frame[:75,:460]
     frame = preprocess(frame)
-    # use Tesseract to OCR the image
     text = pytesseract.image_to_string(frame)   
     print(text)
-    cv2.imshow("",frame)
-    key = cv2.waitKey(5) 
+    cv2.imshow("Time Frame", frame)
+    key = cv2.waitKey(1) 
     if key == 27: #esc key stops the process
         break
