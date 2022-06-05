@@ -1,0 +1,7 @@
+Demonstrated the following:
+    1. Image Processing techniques for object detection 
+    2. Contour-based object detection and object tracking 
+    3. CNN based methods for object tracking 
+        i.  YOLOv3 + center distance estimation
+        ii. YOLOv5 + center distance estimation
+    4. ROI based object tracking
