@@ -9,11 +9,12 @@ cv2.imshow("Cropped Image", frame)
 cv2.waitKey()
 '''
 
-PATH = "D:/Projects/vehicle classification/data/videos/Ch8_20220112161012.mp4"
+PATH = "D:\out.mp4"
 
 import cv2
 import pytesseract
 import argparse
+pytesseract.pytesseract.tesseract_cmd = "C:\Program Files (x86)\Tesseract-OCR\\tesseract"
 
 def preprocess(image, target=30):
     '''

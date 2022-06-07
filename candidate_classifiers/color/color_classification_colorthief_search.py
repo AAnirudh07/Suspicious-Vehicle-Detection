@@ -53,4 +53,4 @@ def get_dominant_colors(folder):
         dominant_color_name = color_bin_search(dominant_color)
         print(f"Filename: {filename} | Dominant color: {dominant_color} | Dominant color name: {color_ranges[dominant_color_name]}")
 
-get_dominant_colors("D:/Projects/suspicious-vehicle-detection/candidate_classifiers/color/test_images")
+get_dominant_colors("D:\Desktop\Test_vehicle\IN\\runs\\track\yolov5l_osnet_x1_03\\crops\\bus\\36.0")
