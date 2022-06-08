@@ -13,7 +13,7 @@ To execute the code for stage, run the file track.py with the video path given a
 
 <div align="center">
 <p>
-<img src="MOT16_eval/track_pedestrians.gif" width="400"/> <img src="MOT16_eval/track_all.gif" width="400"/> 
+<img src="assets/track_pedestrians.gif" width="400"/> <img src="assets/track_all.gif" width="400"/> 
 </p>
 <br>
 <div>
