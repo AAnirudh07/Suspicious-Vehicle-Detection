@@ -9,6 +9,7 @@ from .track import Track
 from csv import writer
 from kmeans import color_picker
 from tesseract import gettime
+import cv2
 class Tracker:
     """
     This is the multi-target tracker.
@@ -61,7 +62,7 @@ class Tracker:
             track.increment_age()
             track.mark_missed()
 
-    def update(self, detections, classes, confidences,fullimage,frameidx):
+    def update(self, detections, classes, confidences,fullimage,params):
         """Perform measurement update and track management.
 
         Parameters
@@ -81,7 +82,7 @@ class Tracker:
         for track_idx in unmatched_tracks:
             self.tracks[track_idx].mark_missed()
         for detection_idx in unmatched_detections:
-            self._initiate_track(detections[detection_idx], classes[detection_idx].item(), confidences[detection_idx].item(),fullimage,frameidx)
+            self._initiate_track(detections[detection_idx], classes[detection_idx].item(), confidences[detection_idx].item(),fullimage,params) #params is a dict
         self.tracks = [t for t in self.tracks if not t.is_deleted()]
 
         # Update distance metric.
@@ -164,27 +165,31 @@ class Tracker:
         unmatched_tracks = list(set(unmatched_tracks_a + unmatched_tracks_b))
         return matches, unmatched_tracks, unmatched_detections
 
-    def _initiate_track(self, detection, class_id, conf,fullimage,frameidx):
-        mean, covariance = self.kf.initiate(detection.to_xyah())
+    def _initiate_track(self, detection, class_id, conf,fullimage,params):
+        #params.keys= "fram_idx"
+        
         class_map={"2":"car","3":"motorcycle","5":"bus","7":"truck"}
         # format : vehicle count number, frame number, type, color ;
-        print(detection)
         x1, y1, x2, y2 = detection.to_tlbr()
-        vehicle_crop = fullimage[int(y1):int(y2), int(x1):int(x2)]
-        # time_crop = fullimage[]
-        color = color_picker(vehicle_crop)
-        time = str(gettime(fullimage))
-        List = [self._next_id,frameidx,class_map[str(int(class_id))],color,time]
-        with open('event.csv', 'a') as f_object:
-            # Pass this file object to csv.writer()
-            # and get a writer object
-            writer_object = writer(f_object)
-            # Pass the list as an argument into
-            # the writerow()
-            writer_object.writerow(List)
-            #Close the file object
-            f_object.close()
-        self.tracks.append(Track(
-            mean, covariance, self._next_id, class_id, conf, self.n_init, self.max_age,
-            detection.feature))
-        self._next_id += 1
+        if((x2-x1)*(y2-y1)>2000): #so farer objects with bounding box area less than 2000 is removed
+            vehicle_crop = fullimage[int(y1):int(y2), int(x1):int(x2)]
+            cv2.imwrite("crops/"+str(self._next_id)+".jpg",vehicle_crop)
+            # time_crop = fullimage[]
+            color = color_picker(vehicle_crop)
+            mean, covariance = self.kf.initiate(detection.to_xyah())
+            enc = "UTF-8"
+            time = str(gettime(fullimage)).encode(enc, errors=' ')
+            List = [self._next_id,params["frame_idx"],class_map[str(int(class_id))],color,time]
+            with open('event.csv', 'a') as f_object:
+                # Pass this file object to csv.writer()
+                # and get a writer object
+                writer_object = writer(f_object)
+                # Pass the list as an argument into
+                # the writerow()
+                writer_object.writerow(List)
+                #Close the file object
+                f_object.close()
+            self.tracks.append(Track(
+                mean, covariance, self._next_id, class_id, conf, self.n_init, self.max_age,
+                detection.feature))
+            self._next_id += 1

@@ -183,7 +183,7 @@ def detect(opt):
 
                 # pass detections to deepsort
                 t4 = time_sync()
-                outputs[i] = deepsort_list[i].update(xywhs.cpu(), confs.cpu(), clss.cpu(), im0,frame_idx)
+                outputs[i] = deepsort_list[i].update(xywhs.cpu(), confs.cpu(), clss.cpu(), im0,params= {"frame_idx":frame_idx,})
                 t5 = time_sync()
                 dt[3] += t5 - t4
 

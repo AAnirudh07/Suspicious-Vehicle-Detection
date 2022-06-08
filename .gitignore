@@ -12,4 +12,4 @@ yolov5_detecting_from_frames/yolov5s.pt
 *.cfg
 *.pt
 mine/*
-
+*/runs/
