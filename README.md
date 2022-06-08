@@ -16,7 +16,7 @@ The results of stage 1 are stored in a CSV file. It has the following headers:
 
 Two such CSV files are generated (one for each video). Each row in the source file is checked to see if a vehicle with the same specifications os present in the second file using a range search. If no such entry is found, then the vehicle is labeled suspicious. After all the rows of the first CSV file are checked, the system returns the list of suspicious vehicles and their pictures. 
 
-# Yolov5 + Deep Sort with OSNet
+## Yolov5 + Deep Sort with OSNet (original documentation)
 
 
 
