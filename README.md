@@ -5,6 +5,17 @@ This repository contains the source code for the suspicious vehicle detection sy
 
 To execute the code for stage, run the file track.py with the video path given as a command line argument. The output will be stored in the folder ./run/tracks.   
 
+
+## Stage 2: Suspicious Vehicle Identification
+The results of stage 1 are stored in a CSV file. It has the following headers:
+
+        1. Frame number
+        2. Vehicle ID
+        3. Car type
+        4. Car color
+
+Two such CSV files are generated (one for each video). Each row in the source file is checked to see if a vehicle with the same specifications os present in the second file using a range search. If no such entry is found, then the vehicle is labeled suspicious. After all the rows of the first CSV file are checked, the system returns the list of suspicious vehicles and their pictures. 
+
 # Yolov5 + Deep Sort with OSNet
 
 
@@ -117,29 +128,3 @@ python3 track.py --source 0 --yolo_model yolov5s.pt --classes 16 17  # tracks ca
 
 [Here](https://tech.amikelive.com/node-718/what-object-categories-labels-are-in-coco-dataset/) is a list of all the possible objects that a Yolov5 model trained on MS COCO can detect. Notice that the indexing for the classes in this repo starts at zero.
 
-
-## MOT compliant results
-
-Can be saved to your experiment folder `runs/track/<yolo_model>_<deep_sort_model>/` by 
-
-```bash
-python3 track.py --source ... --save-txt
-```
-
-
-## Cite
-
-If you find this project useful in your research, please consider cite:
-
-```latex
-@misc{yolov5-deepsort-osnet-2022,
-    title={Real-time multi-camera multi-object tracker using YOLOv5 and DeepSort with OSNet},
-    author={Mikel Broström},
-    howpublished = {\url{https://github.com/mikel-brostrom/Yolov5_DeepSort_OSNet}},
-    year={2022}
-}
-```
-
-## Contact 
-
-For Yolov5 DeepSort OSNet bugs and feature requests please visit [GitHub Issues](https://github.com/mikel-brostrom/Yolov5_DeepSort_OSNet/issues). For business inquiries or professional support requests please send an email to: yolov5.deepsort.pytorch@gmail.com
