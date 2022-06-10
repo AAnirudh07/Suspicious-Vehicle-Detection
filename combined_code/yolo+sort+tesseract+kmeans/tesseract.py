@@ -14,7 +14,7 @@ PATH = "D:\out.mp4"
 import cv2
 import pytesseract
 import argparse
-pytesseract.pytesseract.tesseract_cmd = "C:\Program Files (x86)\Tesseract-OCR\\tesseract"
+#pytesseract.pytesseract.tesseract_cmd = "C:\Program Files (x86)\Tesseract-OCR\\tesseract"
 
 def preprocess(image, target=30):
     '''
