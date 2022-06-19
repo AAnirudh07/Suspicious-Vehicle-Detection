@@ -10,7 +10,7 @@ while True:
     ret, frame = cap.read()
     height, width, _ = frame.shape
 
-    roi = frame[400: 1080,:]
+    roi = frame[450: 1080,:]
 
     mask = object_detector.apply(roi)
     _, mask = cv2.threshold(mask, 254, 255, cv2.THRESH_BINARY)
