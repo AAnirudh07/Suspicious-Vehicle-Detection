@@ -211,8 +211,7 @@ class LoadImages:
                     path = self.files[self.count]
                     self.new_video(path)
                     ret_val, img0 = self.cap.read()
-                    img0 = img0[400: 1080,:]
-
+            img0 = img0[400:1080,:]
             self.frame += 1
             s = f'video {self.count + 1}/{self.nf} ({self.frame}/{self.frames}) {path}: '
 
