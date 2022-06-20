@@ -180,7 +180,7 @@ class Tracker:
             enc = "UTF-8"
             time = str(gettime(fullimage)).encode(enc, errors=' ')
             List = [self._next_id,params["frame_idx"],class_map[str(int(class_id))],color,time]
-            with open('event.csv', 'a') as f_object:
+            with open('event1.csv', 'a') as f_object:
                 # Pass this file object to csv.writer()
                 # and get a writer object
                 writer_object = writer(f_object)

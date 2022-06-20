@@ -261,7 +261,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--yolo_model', nargs='+', type=str, default='yolov5l.pt', help='model.pt path(s)')
     parser.add_argument('--deep_sort_model', type=str, default='osnet_x1_0')
-    parser.add_argument('--source', type=str, default='D:/Projects/vehicle classification/data/videos/Ch8_20220112161012.mp4', help='source')  # file/folder, 0 for webcam
+    parser.add_argument('--source', type=str, default='D:/Downloads/ch01_20220112154221.mp4', help='source')  # file/folder, 0 for webcam
     parser.add_argument('--output', type=str, default='inference/output', help='output folder')  # output folder
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640], help='inference size h,w')
     parser.add_argument('--conf-thres', type=float, default=0.3, help='object confidence threshold')
