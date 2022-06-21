@@ -259,7 +259,7 @@ def detect(opt):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yolo_model', nargs='+', type=str, default='yolov5l.pt', help='model.pt path(s)')
+    parser.add_argument('--yolo_model', nargs='+', type=str, default='yolox_x.pth', help='model.pt path(s)')
     parser.add_argument('--deep_sort_model', type=str, default='osnet_x1_0')
     parser.add_argument('--source', type=str, default='D:/Downloads/ch01_20220112154221.mp4', help='source')  # file/folder, 0 for webcam
     parser.add_argument('--output', type=str, default='inference/output', help='output folder')  # output folder
