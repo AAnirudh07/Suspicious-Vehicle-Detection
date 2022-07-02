@@ -99,7 +99,6 @@ def detect(opt):
     # initialize deepsort
     cfg = get_config()
     cfg.merge_from_file(opt.config_deepsort)
-
     # Create as many trackers as there are video sources
     deepsort_list = []
     for i in range(nr_sources):
