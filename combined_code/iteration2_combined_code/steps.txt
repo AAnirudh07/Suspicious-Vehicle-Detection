@@ -1,0 +1,7 @@
+Crop vehicle images from location A                                                  :toll_images
+remove similar ones(from subsequent 100 images), let the user delete similar images  :uniq_toll_images
+make a directory for each vechile with similar ones                                  :run/vehiclenum inside which the similar vehicle framenum is its file id
+let the user see each directory and retain only the most similar one(singular)       :runs_modified/vechilenum , have a file to keep count of how many u had to remove
+find the differences and find anomaly (mostly the car is not found)                  :find difference,anomalies
+
+feature extractor with similarity >0.7
