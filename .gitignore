@@ -13,3 +13,4 @@ yolov5_detecting_from_frames/yolov5s.pt
 *.pt
 mine/*
 */runs/
+*.pth

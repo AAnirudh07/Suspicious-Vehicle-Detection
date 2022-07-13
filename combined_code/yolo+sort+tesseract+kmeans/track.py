@@ -101,7 +101,6 @@ def detect(opt):
     # initialize deepsort
     cfg = get_config()
     cfg.merge_from_file(opt.config_deepsort)
-
     # Create as many trackers as there are video sources
     deepsort_list = []
     for i in range(nr_sources):
@@ -278,9 +277,10 @@ if __name__ == '__main__':
     parser.add_argument('--yolo_model', nargs='+', type=str,
                         default='yolov5l.pt', help='model.pt path(s)')
     parser.add_argument('--deep_sort_model', type=str, default='osnet_x1_0')
+
     # file/folder, 0 for webcam
-    parser.add_argument('--source', type=str,
-                        default='D:/Downloads/outy_15_07.mp4', help='source')
+    parser.add_argument(
+        '--source', type=str, default='D:/Downloads/ch01_20220112154221.mp4', help='source')
     parser.add_argument('--output', type=str, default='inference/output',
                         help='output folder')  # output folder
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+',
@@ -299,6 +299,7 @@ if __name__ == '__main__':
                         help='save video tracking results')
     parser.add_argument('--save-txt', action='store_false',
                         help='save MOT compliant results to *.txt')
+
     # class 0 is person, 1 is bycicle, 2 is car... 79 is oven
     parser.add_argument('--agnostic-nms', action='store_true',
                         help='class-agnostic NMS')
